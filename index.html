@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grand Amazon · Oficina de Turismo</title>
+  <meta name="description" content="Prepare-se para viver uma aventura sem igual a bordo do único cruzeiro imersivo pelo Amazonas brasileiro com Tudo Incluído.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold:    #C9A84C;
+      --dark:    #1A1A2E;
+      --accent:  #7B2D8B;
+      --light:   #F9F5EE;
+      --green:   #2E7D52;
+      --red:     #C62828;
+      --amazon-green: #0A4A2A; /* Nova cor para o tema amazônico */
+      --amazon-blue: #005670; /* Nova cor para o tema amazônico */
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: #333;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(26,26,46,0.97);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 32px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    nav img { height: 44px; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav ul li a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .5px;
+      transition: color .3s;
+    }
+
+    nav ul li a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+      background:
+        linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.52)),
+        url('grand-amazon.jpg') center/cover no-repeat; /* Imagem de fundo atualizada */
+      color: #fff;
+    }
+
+    .hero-logo {
+      width: 200px;
+      margin-bottom: 28px;
+      filter: drop-shadow(0 3px 12px rgba(0,0,0,.7));
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      letter-spacing: 3px;
+      text-shadow: 0 3px 16px rgba(0,0,0,.5);
+      line-height: 1.1;
+    }
+
+    .hero .subtitle {
+      font-size: clamp(.95rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      margin-top: 16px;
+      color: var(--gold);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,.12);
+      border: 1px solid var(--gold);
+      border-radius: 50px;
+      padding: 10px 24px;
+      font-size: .88rem;
+      backdrop-filter: blur(6px);
+      font-weight: 500;
+    }
+
+    .scroll-hint {
+      margin-top: 60px;
+      font-size: .82rem;
+      opacity: .7;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(10px); }
+    }
+
+    /* ── SECTION TITLES ── */
+    section { padding: 80px 20px; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .section-title span {
+      font-size: .78rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--dark);
+    }
+
+    .section-title .line {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 14px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ── ESSENCIAIS (AGORA SERVIÇOS E INSTALAÇÕES) ── */
+    .essentials { background: #fff; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .info-card {
+      background: var(--light);
+      border-radius: 18px;
+      padding: 34px 26px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07);
+      border-top: 4px solid var(--amazon-green); /* Cor ajustada */
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.12);
+    }
+
+    .info-card .icon { font-size: 2.6rem; margin-bottom: 16px; }
+    .info-card h3 { color: var(--dark); margin-bottom: 10px; font-size: 1.05rem; font-weight: 600; }
+    .info-card p  { font-size: .86rem; color: #555; line-height: 1.7; }
+
+    /* ── ITINERÁRIO (AGORA ROTEIRO DETALHADO) ── */
+    .itinerary-bg {
+      background: linear-gradient(135deg, var(--amazon-blue) 0%, var(--dark) 100%); /* Fundo amazônico */
+      color: #fff;
+    }
+
+    .itinerary-bg .section-title h2 { color: #fff; }
+    .itinerary-bg .section-title span { color: var(--gold); }
+
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,.2));
+      border-radius: 2px;
+    }
+
+    .day {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 36px;
+      position: relative;
+    }
+
+    .day-number {
+      flex-shrink: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      box-shadow: 0 0 0 5px var(--amazon-blue), 0 0 0 7px var(--gold); /* Cor ajustada */
+    }
+
+    .day-content {
+      background: rgba(255,255,255,.06);
+      border-radius: 16px;
+      padding: 22px 26px;
+      flex: 1;
+      border-left: 3px solid var(--gold);
+      transition: background .3s;
+    }
+
+    .day-content:hover { background: rgba(255,255,255,.10); }
+
+    .day-content h3 {
+      color: var(--gold);
+      font-size: .95rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .day-content p { font-size: .86rem; line-height: 1.8; color: #ccc; }
+
+    .tags { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag {
+      display: inline-block;
+      font-size: .72rem;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .tag.green  { background: var(--green); color: #fff; }
+    .tag.blue   { background: #1565C0; color: #fff; }
+    .tag.purple { background: var(--accent); color: #fff; }
+    .tag.gold   { background: var(--gold); color: var(--dark); }
+    .tag.amazon { background: var(--amazon-green); color: #fff; } /* Novo tag */
+
+    /* ── SERVIÇOS ── */
+    .services-section { background: #F0F4F8; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .service-box {
+      background: #fff;
+      border-radius: 18px;
+      padding: 34px 30px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    }
+
+    .service-box.included { border-top: 5px solid var(--amazon-green); } /* Cor ajustada */
+    .service-box.excluded { border-top: 5px solid var(--red); }
+
+    .service-box h3 {
+      font-size: 1.05rem;
+      margin-bottom: 22px;
+      color: var(--dark);
+    }
+
+    .service-box ul { list-style: none; }
+
+    .service-box ul li {
+      font-size: .85rem;
+      color: #444;
+      padding: 8px 0;
+      border-bottom: 1px dashed #eee;
+      display: flex;
+      gap: 10px;
+      line-height: 1.6;
+      align-items: flex-start;
+    }
+
+    .service-box ul li:last-child { border-bottom: none; }
+    .service-box.included ul li::before { content: '✅'; flex-shrink: 0; }
+    .service-box.excluded ul li::before { content: '❌'; flex-shrink: 0; }
+
+    /* ── VOOS ── */
+    .flights-section { background: #EEF2FF; }
+
+    .table-wrap {
+      overflow-x: auto;
+      max-width: 920px;
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    thead { background: var(--dark); color: #fff; }
+
+    thead th {
+      padding: 16px 20px;
+      text-align: left;
+      font-size: .82rem;
+      letter-spacing: .8px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: .85rem;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #f9f5ee; }
+
+    .dir-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    .dir-badge.ida   { background: #C8E6C9; color: #1B5E20; }
+    .dir-badge.volta { background: #FFCCBC; color: #BF360C; }
+
+    /* ── HOTÉIS (AGORA HOTÉIS E CRUZEIRO) ── */
+    .hotels-section { background: #fff; }
+
+    .hotels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .hotel-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.09);
+      border-top: 4px solid var(--amazon-green); /* Cor ajustada */
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.13);
+    }
+
+    .hotel-card .hotel-icon {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hotel-card .city {
+      font-size: .73rem;
+      color: var(--gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .hotel-card h3 {
+      font-size: 1rem;
+      color: var(--dark);
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .hotel-card .nights {
+      display: inline-block;
+      background: var(--light);
+      border: 1px solid var(--gold);
+      color: var(--dark);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .hotel-card p {
+      font-size: .8rem;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    .hotel-card .stars {
+      color: var(--gold);
+      font-size: .95rem;
+      margin-top: 10px;
+      letter-spacing: 2px;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--amazon-blue) 0%, var(--amazon-green) 100%); /* Fundo amazônico */
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    .cta-section p {
+      color: #bbb;
+      margin-bottom: 10px;
+      font-size: .95rem;
+    }
+
+    .cta-section .highlight {
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: .95rem;
+      letter-spacing: .5px;
+      transition: opacity .3s, transform .3s;
+    }
+
+    .cta-btn:hover { opacity: .85; transform: translateY(-3px); }
+    .cta-btn.whatsapp { background: #25D366; color: #fff; }
+    .cta-btn.email    { background: var(--gold); color: var(--dark); }
+    .cta-btn.insta    {
+      background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+      color: #fff;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0d0d1a;
+      color: #777;
+      text-align: center;
+      padding: 44px 20px;
+      font-size: .8rem;
+    }
+
+    footer img {
+      height: 52px;
+      margin-bottom: 18px;
+      filter: brightness(0) invert(1) opacity(.5);
+    }
+
+    footer p { margin-bottom: 6px; line-height: 1.7; }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      nav { padding: 12px 20px; }
+      .timeline::before { left: 22px; }
+      .day-number { width: 46px; height: 46px; font-size: .88rem; }
+      .day { gap: 18px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.2rem; }
+      .badge { padding: 8px 16px; font-size: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <img src="logo-oficina.png" alt="Oficina de Turismo"/>
+  <ul>
+    <li><a href="#sobre">Sobre o Cruzeiro</a></li>
+    <li><a href="#roteiro">Roteiro</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#voos">Voos</a></li>
+    <li><a href="#hospedagem">Hospedagem</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <img class="hero-logo" src="logo-oficina.png" alt="Oficina de Turismo"/>
+  <h1>Grand Amazon</h1>
+  <p class="subtitle">🚢 Cruzeiro de Luxo pelo Amazonas · Tudo Incluído</p>
+  <div class="badges">
+    <span class="badge">✨ 5 Estrelas</span>
+    <span class="badge">🌿 Expedições Imersivas</span>
+    <span class="badge">🍽 Gastronomia Local</span>
+    <span class="badge">🐒 Fauna e Flora</span>
+  </div>
+  <p class="scroll-hint">↓ Explore a Amazônia</p>
+</section>
+
+<!-- ══════════ SOBRE O CRUZEIRO ══════════ -->
+<section class="essentials" id="sobre">
+  <div class="section-title">
+    <span>Sua aventura começa aqui</span>
+    <h2>Grand Amazon Expedition</h2>
+    <div class="line"></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="icon">✨</div>
+      <h3>Cruzeiro de Luxo</h3>
+      <p>O único cruzeiro imersivo pelo Amazonas brasileiro com serviço 5 estrelas e Tudo Incluído.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🌿</div>
+      <h3>Expedições Inesquecíveis</h3>
+      <p>Expedições diurnas e noturnas, todas incluídas, para explorar a vida selvagem e a cultura local.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🍽</div>
+      <h3>Gastronomia Amazônica</h3>
+      <p>Pratos que refletem a rica biodiversidade e cultura da região, contando uma história em cada sabor.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">👨‍👩‍👧‍👦</div>
+      <h3>Cultura Indígena</h3>
+      <p>Envolva-se com a cultura indígena graças à nossa equipe de profissionais locais.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">📶</div>
+      <h3>Wi-Fi Gratuito</h3>
+      <p>Mantenha-se conectado mesmo no coração da floresta amazônica.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🏊‍♀️</div>
+      <h3>Piscina a Bordo</h3>
+      <p>Relaxe e aproveite a paisagem exuberante da Amazônia.</p>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top: 80px;">
+    <span>Expedições Inclusas</span>
+    <h2>Descubra a Amazônia</h2>
+    <div class="line"></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="icon">🌅</div>
+      <h3>O Amanhecer Amazônico</h3>
+      <p>Trilhas pela floresta, visita à comunidade de Três Unidos (povo Kambeba) e observação de botos-cor-de-rosa.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🛶</div>
+      <h3>Entre na Floresta até o Pôr do Sol</h3>
+      <p>Passeio de lancha pelo arquipélago de Anavilhanas, pesca de piranhas e visita ao Museu do Seringal Vila Paraíso.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">🦉</div>
+      <h3>Descubra a Fauna Noturna</h3>
+      <p>Aventura noturna para ver jacarés e outros animais selvagens que se escondem durante o dia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ROTEIRO ══════════ -->
+<section class="itinerary-bg" id="roteiro">
+  <div class="section-title">
+    <span>Sua jornada dia a dia</span>
+    <h2>Roteiro Detalhado</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="day">
+      <div class="day-number">SÁB</div>
+      <div class="day-content">
+        <h3>Voo para Manaus · Chegada e Acomodação</h3>
+        <p>Voo com destino a Manaus. Chegada e traslado para o hotel. Restante do dia livre para explorar a cidade.</p>
+        <div class="tags">
+          <span class="tag blue">✈ Voo Nacional</span>
+          <span class="tag green">🏨 Hotel em Manaus</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-number">DOM</div>
+      <div class="day-content">
+        <h3>City Tour por Manaus</h3>
+        <p>Após o café da manhã, city tour por Manaus conhecendo os principais pontos turísticos da cidade.</p>
+        <div class="tags">
+          <span class="tag purple">🏛 Tour Manaus</span>
+          <span class="tag gold">☕ Café da manhã incluso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-number">SEG</div>
+      <div class="day-content">
+        <h3>Embarque no Grand Amazon · Início do Cruzeiro</h3>
+        <p>Após o café da manhã, traslado para o porto para embarque no Grand Amazon.</p>
+        <p><strong>18h:</strong> Navegação pelo rio Negro, contemplando o pôr do sol do terraço com música ambiente. Registro para os tours na recepção até as 20h do dia anterior a cada tour.</p>
+        <p><strong>19h:</strong> Coquetel de boas-vindas. Brinde o início de sua aventura com nosso coquetel exclusivo à base de jambu, pitaia e pimenta murupi enquanto zarpamos e admiramos o pôr do sol ao som de ritmos amazônicos.</p>
+        <p><strong>20h às 21h30:</strong> Jantar no restaurante VITÓRIA-RÈGIA.</p>
+        <div class="tags">
+          <span class="tag amazon">🚢 Grand Amazon</span>
+          <span class="tag gold">☕ Café da manhã incluso</span>
+          <span class="tag gold">🍽 Jantar incluso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-number">TER</div>
+      <div class="day-content">
+        <h3>Expedições e Palestras a Bordo</h3>
+        <p><strong>5h30 às 11h:</strong> Café da manhã continental no terraço do Tucano Grill. <strong>7h às 9h:</strong> Bufê de café da manhã no restaurante VITÓRIA-RÈGIA.</p>
+        <p><strong>8h às 10h: Tour pela manhã.</strong> Trilha na região dos Igarapés de Jaraqui, com observação da fauna e flora locais, ou passeio de lancha na mesma região.</p>
+        <p><strong>11h30 às 12h30:</strong> Palestra sobre a Amazônia no Salão Luna.</p>
+        <p><strong>12h00 às 12h30:</strong> Visita à cabine de comando (ponto de encontro na recepção).</p>
+        <p><strong>11h30 às 14h30: Almoço.</strong> 11h30 às 13h30: Almoço lanche no Tucano. 13h às 14h30: Bufê no restaurante VITÓRIA-RÈGIA.</p>
+        <p><strong>17h às 19h: Tour durante o dia.</strong> Passeio de lancha entre as ilhas da região de Três Bocas, parte do segundo maior arquipélago fluvial de água doce do mundo.</p>
+        <p><strong>20h às 21h30:</strong> Jantar no restaurante VITÓRIA-RÈGIA.</p>
+        <div class="tags">
+          <span class="tag amazon">🌿 Expedições</span>
+          <span class="tag gold">☕ Café da manhã incluso</span>
+          <span class="tag gold">🍽 Almoço incluso</span>
+          <span class="tag gold">🍽 Jantar incluso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-number">QUA</div>
+      <div class="day-content">
+        <h3>Cultura Local e Pesca de Piranhas</h3>
+        <p><strong>5h30 às 11h:</strong> Café da manhã continental no terraço do Tucano Grill. <strong>7h às 9h:</strong> Bufê de café da manhã no restaurante VITÓRIA-RÈGIA.</p>
+        <p><strong>8h às 10h: Excursão à comunidade do Rio Cuieiras.</strong> Visita a uma comunidade local para conhecer seu modo de vida, costumes e cultivos. Oportunidade para adquirir artesanato local.</p>
+        <p><strong>11h30 às 12h:</strong> Palestra sobre peixes da Amazônia.</p>
+        <p><strong>11h30 às 14h30: Almoço.</strong> 11h30 às 13h30: Almoço lanche no Tucano. 13h às 14h30: Bufê no restaurante VITÓRIA-RÈGIA.</p>
+        <p><strong>16h: Excursão diurna - Caboclo.</strong> Passeio de barco e visita à casa do Caboclo (população local) na região do Ariaú ou prática de pesca de piranhas.</p>
+        <p><strong>20h às 21h30:</strong> Jantar no restaurante VITÓRIA-RÈGIA.</p>
+        <p><strong>21h30 às 22h30: Excursão noturna</strong> na região do Ariaú.</p>
+        <div class="tags">
+          <span class="tag amazon">🎣 Pesca de Piranhas</span>
+          <span class="tag amazon">🦉 Fauna Noturna</span>
+          <span class="tag gold">☕ Café da manhã incluso</span>
+          <span class="tag gold">🍽 Almoço incluso</span>
+          <span class="tag gold">🍽 Jantar incluso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-number">QUI</div>
+      <div class="day-content">
+        <h3>Nascer do Sol, Botos e Show Folclórico</h3>
+        <p><strong>5h30 às 11h:</strong> Café da manhã continental no terraço do Tucano Grill. <strong>7h às 9h:</strong> Bufê de café da manhã no restaurante VITÓRIA-RÈGIA.</p>
+        <p><strong>05h45 às 06h45: Tour pela manhã.</strong> Passeio matinal de lancha na região do Rio Ariaú, para avistar aves e o nascer do sol.</p>
+        <p><strong>8h às 10h: Tour pela manhã.</strong> Observação de botos cor-de-rosa do Amazonas e passeio de lancha.</p>
+        <p><strong>11h30 às 12h30:</strong> Palestra sobre os pássaros da Amazônia.</p>
+        <p><strong>11h30 às 14h30: Almoço.</strong> 11h30 às 13h30: Almoço lanche no Tucano. 13h às 14h30: Bufê no restaurante VITÓRIA-RÈGIA.</p>
+        <p><strong>14h45 às 16h45:</strong> Visita ao Museu do Seringueiro.</p>
+        <p><strong>21h30: Show folclórico.</strong> A melhor noite de entretenimento a bordo com um show folclórico inesquecível.</p>
+        <div class="tags">
+          <span class="tag amazon">🌅 Nascer do Sol</span>
+          <span class="tag amazon">🐬 Botos</span>
+          <span class="tag gold">☕ Café da manhã incluso</span>
+          <span class="tag gold">🍽 Almoço incluso</span>
+          <span class="tag gold">🍽 Jantar incluso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-number">SEX</div>
+      <div class="day-content">
+        <h3>Encontro das Águas · Desembarque e Retorno</h3>
+        <p><strong>5h30 às 8h:</strong> Café da manhã.</p>
+        <p><strong>6h às 6h15:</strong> Encontro das águas dos rios Negro e Solimões.</p>
+        <p><strong>8h às 8h30:</strong> Volta ao porto.</p>
+        <p>Após o desembarque, traslado para o aeroporto para o voo com destino a Guarulhos. <strong>Fim da viagem!</strong></p>
+        <div class="tags">
+          <span class="tag amazon">🌊 Encontro das Águas</span>
+          <span class="tag blue">✈ Retorno a São Paulo</span>
+          <span class="tag gold">☕ Café da manhã incluso</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ SERVIÇOS ══════════ -->
+<section class="services-section" id="servicos">
+  <div class="section-title">
+    <span>Transparência total</span>
+    <h2>O que está incluído?</h2>
+    <div class="line"></div>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-box included">
+      <h3>✅ Serviços Incluídos</h3>
+      <ul>
+        <li>Passagem aérea (classe econômica) GRU/MAO/GRU com 1 bagagem despachada de 23 kg</li>
+        <li>1 noite de hospedagem em Manaus com café da manhã</li>
+        <li>City tour em Manaus</li>
+        <li>Traslados aeroporto / hotel / porto / aeroporto em Manaus</li>
+        <li>Cruzeiro Grand Amazon Expedition com 4 noites de hospedagem</li>
+        <li>Todas as refeições a bordo (café da manhã, almoço, jantar)</li>
+        <li>Bebidas da maior qualidade a bordo (Tudo Incluído)</li>
+        <li>Todas as expedições diurnas e noturnas mencionadas no roteiro</li>
+        <li>Shows de animação profissionais a bordo</li>
+        <li>Acesso à piscina, ginásio e área de shopping a bordo</li>
+        <li>Wi-Fi gratuito a bordo</li>
+        <li>Serviço médico a bordo</li>
+        <li>Serviço de quarto (11:00 - 23:00)</li>
+        <li>Seguro viagem</li>
+      </ul>
+    </div>
+
+    <div class="service-box excluded">
+      <h3>❌ Não Incluídos</h3>
+      <ul>
+        <li>Taxas de embarque aeroportuárias (aprox. USD 80,00 por pessoa)</li>
+        <li>Trechos aéreos internos no Brasil (se necessário)</li>
+        <li>Despesas de caráter pessoal</li>
+        <li>Tudo que não estiver especificado como incluso</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ VOOS ══════════ -->
+<section class="flights-section" id="voos">
+  <div class="section-title">
+    <span>LATAM Airlines</span>
+    <h2>Voos Previstos</h2>
+    <div class="line"></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Direção</th>
+          <th>Trecho</th>
+          <th>Data</th>
+          <th>Voo</th>
+          <th>Saída</th>
+          <th>Chegada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="dir-badge ida">IDA</span></td>
+          <td>✈ Guarulhos → Manaus</td>
+          <td>SÁB (Data a definir)</td>
+          <td><strong>LAXXXX</strong></td>
+          <td>XX:XX</td>
+          <td>XX:XX</td>
+        </tr>
+        <tr>
+          <td><span class="dir-badge volta">VOLTA</span></td>
+          <td>✈ Manaus → Guarulhos</td>
+          <td>SEX (Data a definir)</td>
+          <td><strong>LAXXXX</strong></td>
+          <td>XX:XX</td>
+          <td>XX:XX</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ HOSPEDAGEM ══════════ -->
+<section class="hotels-section" id="hospedagem">
+  <div class="section-title">
+    <span>Conforto garantido</span>
+    <h2>Hospedagem Prevista</h2>
+    <div class="line"></div>
+  </div>
+  <div class="hotels-grid">
+
+    <div class="hotel-card">
+      <span class="hotel-icon">🏨</span>
+      <p class="city">Manaus</p>
+      <h3>Hotel em Manaus</h3>
+      <span class="nights">1 noite</span>
+      <p>ou similar · com café da manhã incluso</p>
+      <p class="stars">★★★★</p>
+    </div>
+
+    <div class="hotel-card">
+      <span class="hotel-icon">🚢</span>
+      <p class="city">Rio Negro · Amazonas</p>
+      <h3>Grand Amazon Expedition</h3>
+      <span class="nights">4 noites</span>
+      <p>Cruzeiro de luxo · Tudo Incluído</p>
+      <p class="stars">★★★★★</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ CTA / CONTATO ══════════ -->
+<section class="cta-section" id="contato">
+  <h2>Garanta sua vaga!</h2>
+  <p>Vagas limitadas · Saídas regulares, consulte datas!</p>
+  <span class="highlight">✨ Oficina de Turismo · Realizando sonhos há mais de 30 anos</span>
+  <div class="cta-buttons">
+    <a class="cta-btn whatsapp"
+       href="https://wa.me/553598862-2943?text=Ol%C3%A1%21+Tenho+interesse+no+pacote+Grand+Amazon+%F0%9F%9B%A2%F0%9F%87%A7%F0%9F%87%B7"
+       target="_blank">
+      💬 WhatsApp (35) 98862-2943
+    </a>
+    <a class="cta-btn email"
+       href="mailto:oficinadeturismo@oficinatur.com.br?subject=Interesse%20Grand%20Amazon"
+       target="_blank">
+      📧 Enviar E-mail
+    </a>
+    <a class="cta-btn insta"
+       href="https://instagram.com/oficinadeturismo"
+       target="_blank">
+      📸 @oficinadeturismo
+    </a>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <img src="logo-oficina.png" alt="Oficina de Turismo"/>
+  <p>
+    📱 <a href="tel:+5535988622943">(35) 98862-2943</a>
+    &nbsp;·&nbsp;
+    📧 <a href="mailto:oficinadeturismo@oficinatur.com.br">oficinadeturismo@oficinatur.com.br</a>
+    &nbsp;·&nbsp;
+    📸 <a href="https://instagram.com/oficinadeturismo" target="_blank">@oficinadeturismo</a>
+  </p>
+  <p style="margin-top: 12px;">© 2026 Oficina de Turismo · Todos os direitos reservados.</p>
+  <p style="margin-top: 6px; color: #555;">Informações, voos e hotéis sujeitos a alteração sem aviso prévio.</p>
+</footer>
+
+</body>
+</html>
